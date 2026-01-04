@@ -19,7 +19,7 @@ int main()
         printf("\n--- Circular Singly Linked List ---\n");
         printf("1. Insert at end\n2. Delete by key\n3. Display\n4. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d\n", &choice);
+        scanf("%d", &choice);
 
         switch(choice) {
             case 1:
@@ -69,48 +69,49 @@ NODE* insertend(NODE *start, int n)
 // Function to delete a node by key
 NODE* deleteByKey(NODE *start, int key)
 {
-    NODE *curr = start, *prev = NULL;
+    NODE *ptr = start, *prev = NULL;
 
     if (start == NULL) {
-        printf("List is empty.\n");
+        printf("List is empty\n");
         return start;
     }
 
-    // If the list has only one node
-    if (curr->next == start && curr->data == key) {
-        free(curr);
-        start = NULL;
-        return start;
-    }
+    do {
+        if (ptr->data == key) {
 
-    // If key is at the start node
-    if (curr->data == key) {
-        while (curr->next != start)
-            curr = curr->next; // move to last node
-        curr->next = start->next;
-        NODE *temp = start;
-        start = start->next;
-        free(temp);
-        return start;
-    }
+            if (ptr == start) {
+                if (start->next == start) {
+                    printf("Deleted element: %d\n", start->data);
+                    free(start);
+                    return NULL;
+                }
 
-    // Otherwise, search for the key
-    prev = start;
-    curr = start->next;
-    while (curr != start && curr->data != key) {
-        prev = curr;
-        curr = curr->next;
-    }
+                prev = start;
+                while (prev->next != start)
+                    prev = prev->next;
 
-    if (curr == start) {
-        printf("Key %d not found.\n", key);
-        return start;
-    }
+                start = start->next;
+                prev->next = start;
+            } 
+            else {
+                prev->next = ptr->next;
+            }
 
-    prev->next = curr->next;
-    free(curr);
+            printf("Deleted element: %d\n", ptr->data);
+            free(ptr);
+            return start;
+        }
+
+        prev = ptr;
+        ptr = ptr->next;
+
+    } while (ptr != start);
+
+    printf("Key not found\n");
     return start;
 }
+
+
 
 // Function to display the circular list
 void display(NODE *start) 
@@ -130,3 +131,96 @@ void display(NODE *start)
     } while(ptr != start);
     printf("\n");
 }
+
+/*
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 1
+Enter number to insert: 3
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 1
+Enter number to insert: 6
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 2
+Enter key to delete: 6
+Deleted element: 6
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 2
+Enter key to delete: 3
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 2
+Enter key to delete: 3
+List is empty
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 3
+List is empty
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 1
+Enter number to insert: 2
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 1
+Enter number to insert: 5
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 3
+The list data are:
+2 5
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 2
+Enter key to delete: 7
+Key not found
+
+--- Circular Singly Linked List ---
+1. Insert at end
+2. Delete by key
+3. Display
+4. Exit
+Enter your choice: 4
+*/

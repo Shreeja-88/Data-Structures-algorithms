@@ -122,21 +122,22 @@ void displayForward(NODE *start) {
 
 // Display reverse
 void displayReverse(NODE *start) {
-    NODE *ptr = start;
+    NODE *ptr;
+
     if (start == NULL) {
         printf("List is empty\n");
         return;
     }
-    // Move to last node
-    while (ptr->rlink != start) {
-        ptr = ptr->rlink;
-    }
+
+    ptr = start->leftlink;  // last node
+
     printf("Reverse traversal:\n");
     do {
         printf("%d ", ptr->data);
         ptr = ptr->leftlink;
     } while (ptr != start->leftlink);
-    printf("%d\n", start->data);
+
+    printf("\n");
 }
 
 // Menu-driven main

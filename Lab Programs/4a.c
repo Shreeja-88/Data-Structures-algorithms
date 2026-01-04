@@ -27,10 +27,8 @@ void main(){
         printf("3. Delete by value\n");
         printf("4. Display\n");
         printf("5. Stop\n\n");
-        if(scanf("%d", &choice) != 1){
-            printf("Invalid input. Exiting.\n");
-            exit(1);
-        }
+        
+        scanf("%d", &choice);
         switch(choice){
             case 1:
                 printf("Enter the number to be inserted: ");
@@ -59,7 +57,7 @@ void main(){
                 display(start);
                 break;
             case 5:
-                return 0;
+                exit(0);
             default:
                 printf("Invalid choice. Please try again.\n");
         }
