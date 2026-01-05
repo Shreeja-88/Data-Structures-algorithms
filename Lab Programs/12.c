@@ -8,7 +8,26 @@ struct node{
 };
 struct node* root;
 
-struct node *insertnode(struct node *root, int data){
+struct node *createnode(int data){
+    struct node *nn;
+    nn=(struct node*)malloc(sizeof(struct node));
+    nn->data=data;
+    nn->left = NULL;
+    nn->right = NULL;
+    return nn;
+}
+struct node* insertnode(struct node *root, int data){
+    if(root == NULL){
+        return createnode(data);
+    }
+    if(data < root->data){
+        root->left = insertnode(root->left, data);
+    } else {
+        root->right = insertnode(root->right, data);
+    }
+    return root;
+}
+/*struct node *insertnode(struct node *root, int data){
     struct node *nn, *ptr, *temp;
     nn=(struct node*)malloc(sizeof(struct node));
     nn->data=data;
@@ -34,6 +53,7 @@ struct node *insertnode(struct node *root, int data){
     }
     return root;
 }
+    */
 
 void inorder(struct node *root){
     if(root != NULL){

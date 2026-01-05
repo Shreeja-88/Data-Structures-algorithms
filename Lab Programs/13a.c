@@ -30,6 +30,7 @@ int totalleafnodes(struct node *root){
         return 0;
     }
     if(root->left == NULL && root->right == NULL){
+        printf("Leaf Node: %d\n", root->data);
         return 1;
     }
     return totalleafnodes(root->left) + totalleafnodes(root->right);
@@ -49,8 +50,10 @@ int main(){
 }
 
 /*
-Enter the number of nodes: 6
-Enter 6 values: 
-12 34 23 11 49 44
-Total leaf nodes in the BST: 3
+Enter the number of nodes: 5
+Enter 5 values: 
+1 4 5 2 3 
+Leaf Node: 3
+Leaf Node: 5
+Total leaf nodes in the BST: 2
 */
